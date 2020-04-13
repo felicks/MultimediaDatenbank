@@ -1,0 +1,83 @@
+<div class="form" >
+  <form (ngSubmit)="search()" #SearchForm="ngForm">
+    <mat-form-field>
+      <input matInput placeholder="Enter search term" [(ngModel)]="searchterm" [ngModelOptions]="{standalone: true}">
+    </mat-form-field><br>
+
+    <mat-form-field>
+      <mat-select placeholder="Type" [ngModelOptions]="{standalone: true}" [(ngModel)]="type">
+        <mat-option value="0">any</mat-option>
+        <mat-option *ngFor="let type of app.types | async" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+
+    <mat-form-field>
+      <mat-select placeholder="Author" [ngModelOptions]="{standalone: true}" [(ngModel)]="author">
+        <mat-option value="0">any</mat-option>
+        <mat-option *ngFor="let author of app.authors | async" [value]="author.id">
+          {{author.firstname + ' ' + author.lastname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-select placeholder="Uploaded..." [ngModelOptions]="{standalone: true}" [(ngModel)]="timestamp">
+        <mat-option value="any">any</mat-option>
+        <mat-option value="day">Today</mat-option>
+        <mat-option value="week">This week</mat-option>
+        <mat-option value="month">This month</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select placeholder="Category" [ngModelOptions]="{standalone: true}" multiple [(ngModel)]="category">
+        <mat-option *ngFor="let category of app.categories | async" [value]="category.id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-select placeholder="Styles" name="style" class="filter-select" [(ngModel)]="styles" 
+        #styleSelect="ngModel">
+        <mat-option value="0">any</mat-option>
+        <mat-option *ngFor="let style of app.styles| async" [value]="style.id">
+          {{style.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-radio-group aria-label="Select an option" [ngModelOptions]="{standalone: true}" [(ngModel)]="color">
+      <mat-radio-button style="margin-right:10px;" checked="true" value="2">any</mat-radio-button>
+      <mat-radio-button style="margin-right:10px;" value="0">greyscale</mat-radio-button>
+      <mat-radio-button style="margin-right:10px;" value="1">color</mat-radio-button>
+
+    </mat-radio-group>
+    <p></p>
+    <button mat-raised-button style="margin-top: 50px; font-size: 20px" type="submit"
+      class="btn btn-outline-inverse btn-lg">Search</button>
+    
+    <p></p>
+  </form>
+  <button mat-raised-button style="font-size: 15px" (click)="reset()"
+  class="btn btn-outline-inverse btn-lg">Reset</button>
+</div>
+
+<div id="results">
+<mat-list class="results">
+    <h1 *ngIf="showResults" >{{length}} Results</h1>
+
+      <mat-list-item (click)="open(result.src, result.description)" style="margin-top:20px;" cols="2" rows="3" *ngFor="let result of results">
+        <div col="0" rowSpan="3">
+          <mat-spinner [diameter]="40" *ngIf="showSpinner"></mat-spinner>
+          <img  *ngIf="!showSpinner" width="100px" height="100px" [src]="result.src">
+        </div>
+
+        <p col="1" row="0" style="font-size:25px; font-weight: bold" mat-line>{{result.title}}</p>
+        <p col="1" row="1" style="font-size:20px; margin-top:5px" mat-line>{{result.description}}</p>
+       
+        <mat-divider width="50%"></mat-divider>
+      </mat-list-item>
+    
+</mat-list>
+
+</div>

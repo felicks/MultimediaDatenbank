@@ -1,0 +1,42 @@
+<div style="text-align: center; padding-top:50px;">
+  <mat-card *ngIf="!authService.isLoggedIn()">
+    <form (ngSubmit)="authService.login(email, password)">
+      <label>Email address</label><br>
+      <mat-form-field>
+        <input matInput [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required>
+      </mat-form-field><br>
+      <label>Password</label><br>
+      <mat-form-field>
+        <input matInput [(ngModel)]="password" type="password" [ngModelOptions]="{standalone: true}" required>
+      </mat-form-field><br>
+      <button mat-raised-button type="submit" class="btn btn-outline-inverse btn-lg">Log in</button><br>
+      <p></p>
+      <label class="error">{{authService.errorMessage}}</label>
+    </form>
+  </mat-card>
+
+  <div *ngIf="authService.isLoggedIn()" style="padding:50px">
+
+    <form *ngIf="!username" (ngSubmit)="setUsername()">
+      <mat-form-field>
+        <input placeholder="Enter your firstname!" style="text-align: center; font-size: 20px" matInput
+          [(ngModel)]="firstname" [ngModelOptions]="{standalone: true}" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <input placeholder="Enter your lastname!" style="text-align: center; font-size: 20px" matInput
+          [(ngModel)]="lastname" [ngModelOptions]="{standalone: true}" required>
+      </mat-form-field><br>
+      <button mat-raised-button type="submit" class="btn btn-outline-inverse btn-lg">Save</button><br>
+    </form>
+    <label style="text-align: center; font-size: 40px" *ngIf="username">Hi {{username}}!</label><br>
+    <p></p>
+    <mat-card class="logout">
+      <label class="loggedIn">You are logged in!</label><br>
+      <p style="font-size:9px">{{authService.id}}</p>
+      <p style="font-size:9px">{{authService.mail}}</p>
+      <p></p>
+      <button mat-raised-button (click)="authService.logout()" class="btn btn-outline-inverse btn-lg">Log
+        out</button><br>
+      </mat-card>
+  </div>
+</div>

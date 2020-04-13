@@ -1,0 +1,10 @@
+<mat-grid-list cols="4">
+  <mat-grid-tile *ngFor="let logo of app.logos| async">
+    <mat-card style="width:200px;">
+      <img mat-card-image (click)="open(logo.path, logo.description)" [src]="logo.path">  
+      <mat-card-title>
+        {{logo.title}}
+      </mat-card-title>
+    </mat-card>
+  </mat-grid-tile>    
+</mat-grid-list>

@@ -1,0 +1,30 @@
+
+
+.mat-form-field{
+    width:500px;
+}
+
+.form{
+    text-align: center;
+}
+.error{
+    color: red; 
+    font-weight: bold; 
+}
+
+.loggedIn{
+    color: green; 
+    font-size: 25px;
+    margin: 50px;
+    font-weight: bold; 
+}
+ .logout{
+     position: absolute;
+     right: 50px;
+     top: 20px;
+ }
+ .results{
+     margin-left: 50px;
+     margin-right:50px;
+     padding-bottom: 50px;
+ }
