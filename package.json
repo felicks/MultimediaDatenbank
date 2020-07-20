@@ -27,7 +27,7 @@
     "document-register-element": "^1.7.2",
     "firebase": "^6.0.4",
     "linq2fire": "^1.0.22",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "ngx-lightbox": "^2.0.1",
     "rgbanalyse": "^0.1.11",
     "rxjs": "~6.3.3",
